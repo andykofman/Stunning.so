@@ -6,6 +6,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "types": ["node", "jest"],
+    "moduleResolution": "node",
     "target": "ES2021",
     "sourceMap": true,
     "outDir": "./dist",
@@ -20,5 +22,5 @@
       "@shared/*": ["../shared/src/*"]
     }
   },
-  "include": ["src/**/*", "../shared/src/**/*"]
+  "include": ["src/**/*", "test/**/*", "../shared/src/**/*"]
 }
