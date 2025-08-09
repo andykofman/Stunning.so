@@ -1,0 +1,17 @@
+{
+  "name": "ai-first",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.14.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "corepack pnpm --dir packages/frontend dev",
+    "dev:api": "corepack pnpm --dir packages/backend start:dev",
+    "build": "corepack pnpm -r build",
+    "lint": "corepack pnpm -r lint",
+    "test": "corepack pnpm -r test"
+  }
+}
+
