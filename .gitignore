@@ -9,8 +9,15 @@ venv/
 .vscode/
 
 
+
+
 # Node & package managers
 node_modules/
+node_modules/.pnpm/@angular-devkit+schematics-cli@17.3.11_chokidar@3.6.0/node_modules/@angular-devkit/schematics/tools
+# Also ignore the same path inside the AI-first workspace (Windows path requested)
+AI-first/node_modules/.pnpm/@angular-devkit+schematics-cli@17.3.11_chokidar@3.6.0/node_modules/@angular-devkit/schematics/tools
+# Future-proof wildcard for version bumps
+AI-first/node_modules/.pnpm/@angular-devkit+schematics-cli@*/node_modules/@angular-devkit/schematics/tools
 .pnp.*
 .pnpm-store/
 pnpm-debug.log*
