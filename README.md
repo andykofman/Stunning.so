@@ -13,7 +13,7 @@ Minimal AI-first starter: a polished Next.js landing preview backed by a NestJS 
 
 ### Read more
 
-- Frontend guide: `AI-first/packages/frontend/README.md`
-- Backend guide: `AI-first/packages/backend/README.md`
-- Monorepo overview: `AI-first/README.md`
+- [Frontend guide](AI-first/packages/frontend/README.md)
+- [Backend guide](AI-first/packages/backend/README.md)
+- [Monorepo overview](AI-first/README.md)
 

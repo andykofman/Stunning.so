@@ -10,8 +10,8 @@ This workspace contains:
 
 See deeper docs:
 
-- Frontend guide: `packages/frontend/README.md`
-- Backend guide: `packages/backend/README.md`
+- [Frontend guide](packages/frontend/README.md)
+- [Backend guide](packages/backend/README.md)
 
 ### Prerequisites
 
