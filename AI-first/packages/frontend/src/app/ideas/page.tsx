@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import type { Idea } from "@shared/types";
 import { fetcher } from "@/utils/fetcher";
 import { API_BASE_URL } from "@/utils/env";
+import { useToast } from "@/components/toast";
 
 type FetchState = "loading" | "success" | "error";
 
@@ -12,6 +13,7 @@ export default function IdeasListPage() {
   const [state, setState] = useState<FetchState>("loading");
   const [ideas, setIdeas] = useState<Idea[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   async function load() {
     setState("loading");
@@ -24,6 +26,7 @@ export default function IdeasListPage() {
       const message = err instanceof Error ? err.message : "Failed to load";
       setError(message);
       setState("error");
+      showToast(message);
     }
   }
 

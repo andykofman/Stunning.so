@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useToast } from "@/components/toast";
 import { API_BASE_URL } from "../../utils/env";
 
 type FormValues = {
@@ -22,6 +23,7 @@ export default function CreateIdeaPage() {
   });
 
   const [serverError, setServerError] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   async function onSubmit(values: FormValues) {
     setServerError(null);
@@ -41,6 +43,7 @@ export default function CreateIdeaPage() {
     } catch (err) {
       const message = err instanceof Error ? err.message : "Something went wrong";
       setServerError(message);
+      showToast(message);
     }
   }
 

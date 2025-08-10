@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import type { Section, Idea } from "@shared/types";
 import { fetcher } from "@/utils/fetcher";
 import { API_BASE_URL } from "@/utils/env";
+import { useToast } from "@/components/toast";
 
 type FetchState = "idle" | "loading" | "success" | "error";
 
@@ -16,6 +17,7 @@ export default function PreviewPage() {
   const [state, setState] = useState<FetchState>("loading");
   const [idea, setIdea] = useState<Idea | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   function buildDefaultSections(text: string): Section[] {
     const hero: Section = {
@@ -60,6 +62,7 @@ export default function PreviewPage() {
       const message = err instanceof Error ? err.message : "Failed to load";
       setError(message);
       setState("error");
+      showToast(message);
     }
   }
 

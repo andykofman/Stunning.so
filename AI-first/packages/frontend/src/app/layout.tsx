@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ToastProvider } from "@/components/toast";
+import { RootErrorBoundary } from "@/components/error-boundary";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,10 +26,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-dvh bg-[#f7f8fb] text-gray-800 dark:bg-gray-950 dark:text-gray-100`}
-      >
-        <div className="grid min-h-dvh place-items-center p-6 filter brightness-95">{children}</div>
+      <body className={`${geistSans.variable} ${geistMono.variable} min-h-dvh bg-[#f7f8fb] text-gray-800 dark:bg-gray-950 dark:text-gray-100`}>
+        <RootErrorBoundary>
+          <ToastProvider>
+            <div className="grid min-h-dvh place-items-center p-6 filter brightness-95">{children}</div>
+          </ToastProvider>
+        </RootErrorBoundary>
       </body>
     </html>
   );
