@@ -1,10 +1,17 @@
 ## AI-first Monorepo
 
-This is a pnpm workspace monorepo containing:
+Minimal, end-to-end starter for an AI-first product: a polished Next.js landing (preview) powered by a NestJS API with MongoDB, sharing strict types across the stack.
 
-- `packages/frontend`: Next.js 14 App Router (TypeScript)
-- `packages/backend`: NestJS 10 (TypeScript)
-- `packages/shared`: Shared TypeScript library
+This workspace contains:
+
+- `packages/frontend`: Next.js App Router (TypeScript)
+- `packages/backend`: NestJS (TypeScript) + Mongoose
+- `packages/shared`: Shared types and utilities (`@shared/*`)
+
+See deeper docs:
+
+- Frontend guide: `packages/frontend/README.md`
+- Backend guide: `packages/backend/README.md`
 
 ### Prerequisites
 
@@ -19,45 +26,24 @@ corepack pnpm install
 
 ### Develop
 
-Run frontend and backend in separate terminals:
+Run in two terminals:
 
 ```
-pnpm dev:web
-pnpm dev:api
+pnpm dev:web   # Next.js at http://localhost:3000
+pnpm dev:api   # NestJS at http://localhost:3001
 ```
 
-Frontend dev server runs on `http://localhost:3000`. Backend dev server runs on `http://localhost:3001` (configure port in Nest if desired).
-
-### Build
+### Build & test
 
 ```
 pnpm build
-```
-
-### Lint
-
-```
-pnpm lint
-```
-
-### Test
-
-```
 pnpm test
 ```
 
-### TypeScript path aliases
+### TypeScript paths
 
-Both apps are configured to import shared code using `@shared/*` which points to `packages/shared/src/*`.
-
-Example usage in Next.js:
+Import shared types from `@shared/*` (points to `packages/shared/src/*`).
 
 ```ts
-import { sharedExample } from '@shared/index';
-```
-
-Example usage in NestJS:
-
-```ts
-import { sharedExample } from '@shared/index';
+import type { Idea, Section } from '@shared/types';
 ```

@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Frontend (Next.js)
 
-## Getting Started
+Next.js App Router UI with a landing preview that renders sections from the API.
 
-First, run the development server:
+### Scripts
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+```
 pnpm dev
-# or
-bun dev
+pnpm build
+pnpm start
+pnpm lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/app/`
+  - `page.tsx`: Home
+  - `create/page.tsx`: Form to create an idea (posts to the backend)
+  - `ideas/page.tsx`: Ideas list
+  - `preview/[id]/page.tsx`: Full-window landing preview (navbar, hero, about, features, contact, footer)
+- `src/components/`: UI components (`toast`, `error-boundary`, etc.)
+- `src/utils/`: `env.ts` (API base), `fetcher.ts`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Data flow
 
-## Learn More
+1. User submits the form in `create/page.tsx` -> POST to `POST /api/ideas`.
+2. On success, navigate to `preview/[id]`.
+3. `preview/[id]/page.tsx` fetches `GET /api/ideas/:id`, sorts sections, renders hero/about/features/contact.
 
-To learn more about Next.js, take a look at the following resources:
+### Shared types
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The app imports `Idea` and `Section` from `@shared/types` for strict typing across client and server.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Styling & UX
 
-## Deploy on Vercel
+- TailwindCSS with utility classes, accessible focus states, and reduced-motion awareness.
+- Smooth scrolling is enabled globally; animations are disabled under `prefers-reduced-motion`.
+- Hero uses a subtle animated gradient background.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Environment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`API_BASE_URL` is resolved in `src/utils/env.ts`. During local dev it points to the backend origin.

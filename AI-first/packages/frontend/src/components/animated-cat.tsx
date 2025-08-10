@@ -9,12 +9,14 @@ export function AnimatedCat({
   exitTarget,
   onExited,
   onStatusChange,
+  onCloneRequest,
 }: {
   active: boolean;
   spawnAt?: Point;
   exitTarget?: Point;
   onExited?: () => void;
   onStatusChange?: (status: { position: Point; distanceToExit: number; exiting: boolean }) => void;
+  onCloneRequest?: (spawnAt: Point) => void;
 }) {
   const [catPosition, setCatPosition] = useState<Point>({ x: 0, y: 0 });
   const [isJumping, setIsJumping] = useState(false);
@@ -29,6 +31,7 @@ export function AnimatedCat({
   const stepPhaseRef = useRef(0);
   const [explosion, setExplosion] = useState<{ id: number; x: number; y: number } | null>(null);
   const explosionIdRef = useRef(0);
+  const clickSeriesRef = useRef(0);
 
   // Visual scale (1.5x bigger) and base SVG dimensions
   const BASE_SCALE = 1.5;
@@ -224,6 +227,15 @@ export function AnimatedCat({
     const forward = 140;
     v.y = -750; // upward impulse
     v.x += direction * forward; // forward impulse
+
+    // Count clicks for cloning behavior
+    clickSeriesRef.current += 1;
+    if (clickSeriesRef.current >= 3) {
+      clickSeriesRef.current = 0;
+      // Request a clone at current position (slightly offset to avoid perfect overlap)
+      const base = posRef.current;
+      onCloneRequest?.({ x: base.x + (Math.random() * 20 - 10), y: base.y });
+    }
   };
 
   const tilt = Math.max(-4, Math.min(4, (velRef.current.x / 260) * 4));

@@ -7,7 +7,7 @@ import { AnimatedCat } from './animated-cat';
 export function CatLauncher() {
   const [active, setActive] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [spawnPoint, setSpawnPoint] = useState<{ x: number; y: number } | undefined>(undefined);
+  const [spawnPoints, setSpawnPoints] = useState<Array<{ x: number; y: number }>>([]);
   const [deadline, setDeadline] = useState<number | null>(null);
   const timerRef = useRef<number | null>(null);
   const [status, setStatus] = useState<{ position: { x: number; y: number }; distanceToExit: number; exiting: boolean } | null>(null);
@@ -23,7 +23,7 @@ export function CatLauncher() {
   const start = () => {
     setMounted(true);
     setActive(true);
-    setSpawnPoint({ x: buttonPos.x, y: buttonPos.y });
+    setSpawnPoints([{ x: buttonPos.x, y: buttonPos.y }]);
     const until = Date.now() + 30_000;
     setDeadline(until);
     if (timerRef.current) window.clearTimeout(timerRef.current);
@@ -41,7 +41,7 @@ export function CatLauncher() {
   useEffect(() => {
     const onResize = () => {
       // force rerender by toggling state
-      setSpawnPoint((p) => (p ? { ...p } : p));
+      setSpawnPoints((arr) => [...arr]);
     };
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
@@ -50,21 +50,30 @@ export function CatLauncher() {
   return (
     <>
       {/* Cat instance */}
-      {mounted && (
-        <AnimatedCat
-          active={active}
-          spawnAt={spawnPoint}
-          exitTarget={buttonPos}
-          // While exiting, we do not remount or toggle state; rely on cat to call onExited
-          onStatusChange={setStatus}
-          onExited={() => {
-            setDeadline(null);
-            setSpawnPoint(undefined);
-            setMounted(false); // fully reset by unmounting
-            setActive(false);
-          }}
-        />
-      )}
+      {mounted &&
+        spawnPoints.map((pt, idx) => (
+          <AnimatedCat
+            key={`cat-${idx}`}
+            active={active}
+            spawnAt={pt}
+            exitTarget={buttonPos}
+            onStatusChange={idx === 0 ? setStatus : undefined}
+            onCloneRequest={(p: { x: number; y: number }) => setSpawnPoints((arr) => [...arr, p])}
+            onExited={() => {
+              // Wait for all to request exit; when active=false, each will explode and call onExited.
+              // After the last one finishes, reset mounted/state.
+              // We detect last by deferring reset until no cats remain (active already false).
+              setTimeout(() => {
+                if (!active) {
+                  setSpawnPoints([]);
+                  setDeadline(null);
+                  setMounted(false);
+                  setActive(false);
+                }
+              }, 50);
+            }}
+          />
+        ))}
 
       {/* Floating action button */}
       <button

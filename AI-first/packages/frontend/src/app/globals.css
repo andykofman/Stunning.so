@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global smooth scrolling with reduced motion preference */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Subtle animated gradient for hero background */
+@keyframes floatGradient {
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
+  50% { transform: translate3d(12px, -12px, 0) scale(1.03); opacity: 1; }
+  100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.9; }
+}
+
+.hero-ambient {
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  background:
+    radial-gradient(40% 35% at 55% 35%, rgba(124, 58, 237, 0.16), transparent 60%),
+    radial-gradient(35% 40% at 45% 65%, rgba(59, 130, 246, 0.14), transparent 60%);
+  filter: blur(36px);
+  animation: floatGradient 18s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ambient { animation: none; }
+}
