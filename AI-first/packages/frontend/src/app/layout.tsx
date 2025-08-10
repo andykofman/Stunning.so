@@ -24,8 +24,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} min-h-dvh bg-[#f7f8fb] text-gray-800 dark:bg-gray-950 dark:text-gray-100`}
+      >
+        <div className="grid min-h-dvh place-items-center p-6 filter brightness-95">{children}</div>
       </body>
     </html>
   );

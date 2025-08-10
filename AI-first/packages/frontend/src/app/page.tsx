@@ -1,95 +1,48 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main className="relative w-full max-w-3xl">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-aurora opacity-60 blur-2xl dark:opacity-60" />
+      <div className="flex flex-col items-center gap-8 rounded-2xl border border-white/30 bg-white/70 p-10 text-center shadow-glow backdrop-blur-md dark:border-white/10 dark:bg-black/30 dark:shadow-elevated dark:shadow-neonViolet">
+        <div className="flex w-full items-center justify-between">
+          <div className="text-left">
+            <h1 className="bg-gradient-to-r from-neon-pink via-neon-violet to-neon-blue bg-clip-text text-4xl font-extrabold text-transparent drop-shadow-neon">
+              Stunning Ideas
+            </h1>
+            <p className="mt-2 text-sm text-black/70 dark:text-white/80">
+              Smooth and stunning ideas for your next project.
+            </p>
+          </div>
+          <ThemeToggle />
+        </div>
 
-        <div className={styles.ctas}>
+        <p className="text-balance text-lg text-black/70 dark:text-white/90">
+          Bring your concept and we will shape it into three elegant sections: hero, about, and
+          contact. Start crafting now.
+        </p>
+
+        <div className="grid w-full gap-4 md:grid-cols-2">
           <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            className="group rounded-xl border border-white/40 bg-white/80 p-6 text-left transition hover:shadow-glow hover:backdrop-blur-lg dark:border-white/10 dark:bg-black/30"
+            href="#"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            <h2 className="mb-2 text-xl font-semibold">Create an Idea →</h2>
+            <p className="text-sm text-black/60 group-hover:text-black/80 dark:text-white/60 dark:group-hover:text-white/80">
+              Post a new idea to the backend.
+            </p>
           </a>
           <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
+            className="group rounded-xl border border-white/40 bg-white/80 p-6 text-left transition hover:shadow-glow hover:backdrop-blur-lg dark:border-white/10 dark:bg-black/30"
+            href="#"
           >
-            Read our docs
+            <h2 className="mb-2 text-xl font-semibold">Browse Ideas →</h2>
+            <p className="text-sm text-black/60 group-hover:text-black/80 dark:text-white/60 dark:group-hover:text-white/80">
+              List and explore created ideas.
+            </p>
           </a>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+    </main>
   );
 }
