@@ -20,7 +20,8 @@ export class IdeasController {
 
   @Post()
   create(@Body() body: CreateIdeaDto) {
-    return this.ideasService.create({ idea: body.idea, sections: [] });
+    const sections = IdeasService.buildDummySections(body.idea);
+    return this.ideasService.create({ idea: body.idea, sections });
   }
 }
 

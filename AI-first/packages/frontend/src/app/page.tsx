@@ -1,5 +1,6 @@
 import { ThemeToggle } from '@/components/theme-toggle';
 import { CatLauncher } from '@/components/cat-launcher';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -24,24 +25,24 @@ export default function Home() {
         </p>
 
         <div className="grid w-full gap-4 md:grid-cols-2">
-          <a
+          <Link
             className="group rounded-xl border border-white/40 bg-white/80 p-6 text-left transition hover:shadow-glow hover:backdrop-blur-lg dark:border-white/10 dark:bg-black/30"
-            href="#"
+            href="/create"
           >
             <h2 className="mb-2 text-xl font-semibold">Create an Idea →</h2>
             <p className="text-sm text-black/60 group-hover:text-black/80 dark:text-white/60 dark:group-hover:text-white/80">
               Post a new idea to the backend.
             </p>
-          </a>
-          <a
+          </Link>
+          <Link
             className="group rounded-xl border border-white/40 bg-white/80 p-6 text-left transition hover:shadow-glow hover:backdrop-blur-lg dark:border-white/10 dark:bg-black/30"
-            href="#"
+            href={{ pathname: "/ideas" }}
           >
             <h2 className="mb-2 text-xl font-semibold">Browse Ideas →</h2>
             <p className="text-sm text-black/60 group-hover:text-black/80 dark:text-white/60 dark:group-hover:text-white/80">
               List and explore created ideas.
             </p>
-          </a>
+          </Link>
         </div>
       </div>
       <CatLauncher />
