@@ -25,6 +25,9 @@ export default {
       dropShadow: {
         neon: '0 0 10px rgba(155,92,255,.65)',
       },
+      animation: {
+        'spin-slow': 'spin 6s linear infinite',
+      },
       backgroundImage: {
         aurora:
           'radial-gradient(60% 80% at 20% 10%, rgba(255,63,212,0.25) 0%, rgba(255,63,212,0) 60%), radial-gradient(70% 90% at 90% 10%, rgba(0,224,255,0.22) 0%, rgba(0,224,255,0) 60%), radial-gradient(60% 60% at 50% 80%, rgba(106,0,255,0.30) 0%, rgba(106,0,255,0) 60%)',

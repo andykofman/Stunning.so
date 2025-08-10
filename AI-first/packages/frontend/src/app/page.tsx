@@ -1,4 +1,5 @@
 import { ThemeToggle } from '@/components/theme-toggle';
+import { CatLauncher } from '@/components/cat-launcher';
 
 export default function Home() {
   return (
@@ -43,6 +44,7 @@ export default function Home() {
           </a>
         </div>
       </div>
+      <CatLauncher />
     </main>
   );
 }

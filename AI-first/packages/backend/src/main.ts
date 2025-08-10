@@ -15,7 +15,7 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       transform: true,
-      forbidNonWhitelisted: false,
+      forbidNonWhitelisted: false,  // extra fields are removed
       exceptionFactory: (errors) => new BadRequestException(errors),
     }),
   );
